@@ -8,6 +8,8 @@ class CalculatorController:
         for btn in self.view.buttons:
             btn.config(command=lambda b=btn:
                        self.on_click(b["text"]))
+            
+        self.view.delete.config(command=self.delete)
         
         self.view.clear_btn.config(command=self.clear)
 
@@ -19,6 +21,10 @@ class CalculatorController:
 
     def on_click(self,char):
         value=self.model.add(char)
+        self.view.set_entry(value)
+
+    def delete(self):
+        value = self.model.delete()
         self.view.set_entry(value)
 
     def clear(self):
