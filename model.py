@@ -2,19 +2,19 @@ import math
 
 class CalculatorModel:
     def __init__(self):
-        self.value="0"   
+        self.value=""   
 
     def add(self,fish):
-        if self.value =="" and fish in "+-*/**":
+        if self.value =="" and fish in "+÷×^":
             return self.value
-        
-        elif len(self.value)>=1 and self.value[-1] in "+-*/**" and fish in "+-*/**":
+            
+        elif len(self.value)>=1 and self.value[-1] in "+-×÷^" and fish in "+-×÷^":
             return self.value
         
         elif len(self.value)>=1 and self.value[-1]=="0" and fish.isdigit():
             self.value = self.value[:-1] + fish
             return self.value
-
+    
         elif self.value == "0":
             if fish.isdigit():
                 return fish
@@ -25,9 +25,15 @@ class CalculatorModel:
         self.value +=fish
         return self.value
     
+    def parenthese (self):
+        pass
+    
+    def racine (self) :
+        pass
+
     def delete(self):
-            self.value = self.value[:-1]
-            return self.value
+        self.value = self.value[:-1]
+        return self.value
     
     def clear(self):
         self.value=""
@@ -37,47 +43,52 @@ class CalculatorModel:
     
 
     def converssion_signe(self,value):
-        expr = value.replace ("×" , "*")
-        expr = expr.replace ("÷" , "/")
-        expr = expr.replace ("√" , "math.sqrt")
-        expr = expr.replace ("^" , "**")
-        return expr
+        key = value.replace ("×" , "*")
+        key = key.replace ("÷" , "/")
+        key = key.replace ("√" , "math.sqrt")
+        key = key.replace ("^" , "**")
+        return key
 
     def calculate(self):
          
         fonction_acceptable = {k: getattr(math,k) for k in dir(math) if not k.startswith("__")}
 
-
         self.value = self.converssion_signe(self.value)
-        if len(self.value)>=1 and self.value[-1] in "+-*/**":
+
+        if len(self.value)>=1 and self.value[-1] in "×÷^√-+":
             return self.value
-        
+            
+        elif self.value == "Paire" or self.value == "Impaire" :
+            self.value = ""
+            return self.value
         elif self.value == "":
             return self.value
         
         try:
             self.value=str(eval(self.value,{"__builtins__":None},fonction_acceptable))
+            return self.value
 
-        except ZeroDivisionError:
-            return "Tanw kreten 😂"
-            
-        except:
+        except Exception as e :
             self.self.value="Error"
-        return self.value
+            print(e)
+            return self.value
+        
     
 
     def modulo (self) :
-        if "+-÷√×^()" in self.value:
-            self.value = self.value
-            return self.value
-
-        elif int(self.value) % 2 == 0 :
-            self.value = "Paire"
-            return self.value
+        try:
+            if int(self.value) % 2 == 0 :
+                self.value = "Paire"
+                return self.value
+            
+            elif int(self.value) % 2 == 1 :
+                self.value = "Impaire"
+                return self.value
+            elif self.value == "" :
+                self.value = self.value
+                return self.value
         
-        elif int(self.value) % 2 == 1 :
-            self.value = "Impaire"
+        except Exception:
+            self.value = "Error"
             return self.value
-        """else :
-            self.value = self.value
-            return self.value"""
+            
