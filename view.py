@@ -1,9 +1,14 @@
 #pour ajouter la fenetre
 import customtkinter as ctk
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("blue")
+
+
 class CalculatorView:
     def __init__(self,win_view):     
         self.win_view=win_view
         self.win_view.title("MVC Calculatrice CSI")
+        self.win_view.resizable(False,False)
         
         self.entrer = ctk.CTkEntry(
             win_view,
@@ -18,7 +23,7 @@ class CalculatorView:
 
 
         list_bouton = [
-            "(",")","√",
+            "( )","^","√",
             ]
         
         self.btn0_list = []
@@ -26,17 +31,17 @@ class CalculatorView:
             btn0 = ctk.CTkButton(
                 win_view,
                 text=nom,
-                fg_color="#E43414",
-                hover_color="#24D1BA",
+                text_color= "#40E0D0",
                 width = 70,
-                height = 50
+                height = 50,
+                fg_color="#555555"
                 )
             btn0.grid(row = 2 , column = i , pady = 1 , padx = 1 , sticky = "nsew")
             self.btn0_list.append(btn0)
 
         
         list_bouton1 = [
-            "×","÷","+","-","."
+            "÷","×","-","+"
             ]
         
         self.btn1_list = []
@@ -44,73 +49,69 @@ class CalculatorView:
             btn1 = ctk.CTkButton(
                 win_view,
                 text=nom,
+                text_color= "#40E0D0",
                 font=("Arial",18,"bold"),
-                fg_color="#E43414",
-                hover_color="#24D1BA",
                 width = 70,
-                height = 50
-                )
-            if i == 4 :
-                btn1.grid( row = i +2 , column = 0 , padx = 1 , pady = 1 , sticky = "nsew")
-            else :
-                btn1.grid( row = i +2, column= 3 , pady = 2 , padx = 2 , sticky = "nsew")
+                height = 50,
+                fg_color="#555555"
+                )          
+            btn1.grid( row = i +2, column= 3 , pady = 2 , padx = 2 , sticky = "nsew")
             self.btn1_list.append(btn1)
 
 
         list_bouton2 = [
-            "9","8","7",
-            "6","5","4",
-            "3","2","1",
-            "0"
+            "7","8","9",
+            "4","5","6",
+            "1","2","3",
+            "+/-","0","."
             ]
         self.btn2_list = []
         for i , nom in enumerate(list_bouton2) :
             btn2 = ctk.CTkButton(
                 win_view,
                 text=nom,
+                text_color= "#40E0D0",
                 font=("Arial",18,"bold"),
-                fg_color="#571212",
-                hover_color="#24D1BA",
+                fg_color="#383838",
+                hover_color="#4A4A4A",
                 width = 70,
                 height = 50
-                )
-            if i == 9 :
-                btn2.grid(row = (i//3) +3 , column = (i % 3) +1 , pady= 1 , padx = 1 , sticky = "nsew")
-            else :
-                btn2.grid(row = (i//3) +3 , column= i % 3 , padx = 1 , pady = 1 , sticky = "nsew")
+                )       
+            btn2.grid(row = (i//3) +3 , column= i % 3 , padx = 1 , pady = 1 , sticky = "nsew")
             self.btn2_list.append(btn2)
 
 
         list_bouton3 = [
-            "AC","Mod","^","Del"
+            "C","Mod","Del"
             ]
         self.btn3_list = []
         for i,nom in enumerate(list_bouton3):
             btn3 = ctk.CTkButton(
                 win_view,
                 text=nom,
+                text_color= "#40E0D0",
                 font=("Arial",18),
-                fg_color="#571212",
-                hover_color="#24D1BA",
-                width = 70,
-                height = 50
+                fg_color="transparent",
+                hover_color=None,
+                width = 10,
+                height = 30
                 )
-            btn3.grid(row = 1 , column= i , pady = 1 , padx = 1 , sticky = "nsew")
+            if i == 2 :
+                btn3.grid(row = 1 , column= i+1 , pady = 1 , padx = 1 , sticky = "nsew")
+            else:
+                btn3.grid(row = 1 , column= i , pady = 1 , padx = 1 , sticky = "nsew")           
             self.btn3_list.append(btn3)
         
         self.egal_btn = ctk.CTkButton(
             win_view,
             text= "=",
             font=("Arial",18,"bold"),
-            fg_color= "#d61b1b",
-            hover_color= "#24D1BA",
-            width = 142,
+            width = 70,
             height= 50
             )
         self.egal_btn.grid(
             row = 6 ,
-            column = 2,
-            columnspan = 3 ,
+            column = 3,
             padx= 1 ,
             pady = 1 ,
             sticky = "nsew"

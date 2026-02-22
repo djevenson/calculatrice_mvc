@@ -22,13 +22,19 @@ class CalculatorController:
                        self.on_click(b.cget("text")))
         #self.view.btn3_list[2].configure(command=lambda b=btn3_list[2] :self.on_click(b.cget("text")))
             
-        self.view.btn3_list[3].configure(command=self.delete)
+        self.view.btn3_list[2].configure(command=self.delete)
         
         self.view.btn3_list[0].configure(command=self.clear)
 
         self.view.egal_btn.configure(command=self.calculate)
 
         self.view.btn3_list[1].configure(command = self.modulo)
+
+        self.view.btn0_list[0].configure(command = self.parenthese)
+
+        self.view.btn0_list[2].configure(command = self.racine)
+
+        self.view.btn2_list[9].configure(command = lambda : self.on_click("-"))
     
     def calculate(self):
         value = self.model.calculate()
@@ -50,5 +56,19 @@ class CalculatorController:
         
         value = self.model.modulo()  
         self.view.set_entrer(value)  
+
+    def parenthese (self) :
+        pass
+        """value = self.model.parenthese()
+        self.view.set_entrer(value)"""
+
+    def racine (self) :
+        pass
+        """value = self.model.racine()
+        self.view.set_entrer(value)"""
+
+
+        
+
 
     
