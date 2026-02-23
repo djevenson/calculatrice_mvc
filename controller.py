@@ -41,7 +41,7 @@ class CalculatorController:
         self.view.set_entrer(value)
 
     def on_click(self,char):
-        value=self.model.add(char)
+        value = self.model.add(char)
         self.view.set_entrer(value)
 
     def delete(self):
@@ -49,7 +49,7 @@ class CalculatorController:
         self.view.set_entrer(value)
 
     def clear(self):
-        value=self.model.clear()
+        value = self.model.clear()
         self.view.set_entrer(value)
 
     def modulo (self) :
@@ -59,8 +59,8 @@ class CalculatorController:
 
     def parenthese (self) :
         pass
-        """value = self.model.parenthese()
-        self.view.set_entrer(value)"""
+        value = self.model.parenthese()
+        self.view.set_entrer(value)
 
     def racine (self) :
         pass

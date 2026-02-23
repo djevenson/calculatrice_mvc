@@ -5,10 +5,13 @@ class CalculatorModel:
         self.value=""   
 
     def add(self,fish):
-        if self.value =="" and fish in "+÷×^":
+        if self.value =="" and fish in "+÷×^.":
+            self.value = ""
             return self.value
+        
+        
             
-        elif len(self.value)>=1 and self.value[-1] in "+-×÷^" and fish in "+-×÷^":
+        elif len(self.value)>=1 and self.value[-1] in "+-×÷^." and fish in "+-×÷^.":
             return self.value
         
         elif len(self.value)>=1 and self.value[-1]=="0" and fish.isdigit():
@@ -26,7 +29,28 @@ class CalculatorModel:
         return self.value
     
     def parenthese (self):
-        pass
+        n_par_ouvertes = self.value.count("(")
+        n_par_fermees = self.value.count(")")
+
+        if n_par_ouvertes == n_par_fermees :
+            self.value += "("
+            return self.value                
+
+        elif self.value[-1] in "+÷×^(":
+            self.value += "("
+         
+        elif n_par_ouvertes > n_par_fermees :
+            self.value += ")"
+            return self.value
+        
+        elif n_par_ouvertes < n_par_fermees :
+            self.value += "("
+            return self.value
+        
+        else :
+            self.value += "("
+            return self.value
+
     
     def racine (self) :
         pass
@@ -57,6 +81,9 @@ class CalculatorModel:
 
         if len(self.value)>=1 and self.value[-1] in "×÷^√-+":
             return self.value
+
+        elif self.value.count("(") != self.value.count(")") :
+            return self.value
             
         elif self.value == "Paire" or self.value == "Impaire" :
             self.value = ""
@@ -69,8 +96,7 @@ class CalculatorModel:
             return self.value
 
         except Exception as e :
-            self.self.value="Error"
-            print(e)
+            self.value="Error"
             return self.value
         
     
