@@ -117,6 +117,8 @@ class CalculatorView:
                 btn3.grid(row = 2 , column= i , pady = 1 , padx = 1 , sticky = "nsew")           
             self.btn3_list.append(btn3)
         
+        self.btn3_list[0].configure(text_color="red")
+
         self.egal_btn = ctk.CTkButton(
             win_view,
             text= "=",

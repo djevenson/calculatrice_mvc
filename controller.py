@@ -17,11 +17,10 @@ class CalculatorController:
             btn0.configure(command=lambda b=btn0: 
                            self.on_click(b.cget("text")))
         
-        expo = self.view.btn3_list[2]
-        expo.configure(command = lambda b=expo:
-                       self.on_click(b.cget("text")))
-        #self.view.btn3_list[2].configure(command=lambda b=btn3_list[2] :self.on_click(b.cget("text")))
-            
+        
+        self.view.btn3_list[2].configure(command = lambda :
+                       self.on_click("^"))
+       
         self.view.btn3_list[2].configure(command=self.delete)
         
         self.view.btn3_list[0].configure(command=self.clear)
@@ -64,8 +63,8 @@ class CalculatorController:
 
     def racine (self) :
         pass
-        """value = self.model.racine()
-        self.view.set_entrer(value)"""
+        value = self.model.racine()
+        self.view.set_entrer(value)
 
 
         
