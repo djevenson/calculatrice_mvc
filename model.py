@@ -5,12 +5,14 @@ class CalculatorModel:
         self.value=""   
 
     def add(self,fish):
-        if self.value =="" and fish in "+÷×^.":
+        if self.value =="" and fish in "+÷×^":
             self.value = ""
             return self.value
         
-        
-            
+        elif self.value == "" and fish == ".":
+            self.value += "0."
+            return self.value
+
         elif len(self.value)>=1 and self.value[-1] in "+-×÷^." and fish in "+-×÷^.":
             return self.value
         
@@ -33,11 +35,16 @@ class CalculatorModel:
         n_par_fermees = self.value.count(")")
 
         if n_par_ouvertes == n_par_fermees :
-            self.value += "("
-            return self.value                
+            if self.value[-1] in "0123456789)":
+                self.value += "×("
+                return self.value           
+            else:
+                self.value += "("
+                return self.value              
 
         elif self.value[-1] in "+÷×^(":
             self.value += "("
+            return self.value
          
         elif n_par_ouvertes > n_par_fermees :
             self.value += ")"
@@ -45,7 +52,7 @@ class CalculatorModel:
         
         elif n_par_ouvertes < n_par_fermees :
             self.value += "("
-            return self.value
+            return self.value       
         
         else :
             self.value += "("
@@ -53,7 +60,22 @@ class CalculatorModel:
 
     
     def racine (self) :
-        pass
+        if self.value == "":
+            self.value += "√("
+            return self.value
+        elif self.value[-1] in "+÷×^(":
+            self.value += "√("
+            return self.value
+        
+        elif self.value == "-":
+            self.value += "√("
+            return self.value   
+        
+        else :
+            self.value += "×√("
+            return self.value
+        
+        
 
     def delete(self):
         self.value = self.value[:-1]
@@ -69,7 +91,7 @@ class CalculatorModel:
     def converssion_signe(self,value):
         key = value.replace ("×" , "*")
         key = key.replace ("÷" , "/")
-        key = key.replace ("√" , "math.sqrt")
+        key = key.replace ("√" , "sqrt")
         key = key.replace ("^" , "**")
         return key
 
@@ -93,7 +115,12 @@ class CalculatorModel:
         
         try:
             self.value=str(eval(self.value,{"__builtins__":None},fonction_acceptable))
-            return self.value
+            if "." in self.value:
+                resultat = str(round(float(self.value),5))
+                return resultat
+            else:
+                return self.value
+        
 
         except Exception as e :
             self.value="Error"
