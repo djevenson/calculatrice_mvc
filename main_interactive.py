@@ -9,5 +9,6 @@ win_view=ctk.CTk()
 model = CalculatorModel()
 view = CalculatorView(win_view)
 controller = CalculatorController(model,view)
+win_view.focus_set()
 
 win_view.mainloop()
