@@ -1,48 +1,53 @@
 import math
 
-class CalculatorModel:
-    def __init__(self):
+class CalculatorModel:  #classe qui gere les donnees et la logique de l'application
+    def __init__(self): #initialisation de la classe
         self.value=""   
 
-    def add(self,fish):
-        if self.value =="" and fish in "+÷×^":
+    def add(self,fish): #ajouter le caractère clique au entry
+        
+        if self.value =="" and fish in "+÷×^": #si le entry est vide et que l'utilisateur clique sur un opérateur, ne rien faire
             self.value = ""
             return self.value
         
-        elif self.value == "" and fish == ".":
+        elif fish.isalpha():
+            return self.value
+
+        elif self.value == "" and fish == ".": #si le entry est vide et que l'utilisateur clique sur le point, ajouter "0." au entry
             self.value += "0."
             return self.value
 
-        elif len(self.value)>=1 and self.value[-1] in "+-×÷^." and fish in "+-×÷^.":
+        elif len(self.value)>=1 and self.value[-1] in "+-×÷^." and fish in "+-×÷^.": #si le dernier caractère du entry est un opérateur et que l'utilisateur clique sur un opérateur, remplacer le dernier caractère par le nouveau
             return self.value
         
-        elif len(self.value)>=1 and self.value[-1]=="0" and fish.isdigit():
-            self.value = self.value[:-1] + fish
+        
+        elif len(self.value)>=1 and self.value[-1]==")" and fish.isdigit():
+            self.value += "×" + fish
             return self.value
     
-        elif self.value == "0":
+        elif self.value == "0": #si le entry contient "0" et que l'utilisateur clique sur un chiffre, remplacer "0" par le nouveau chiffre
             if fish.isdigit():
                 return fish
             else :
                 self.value += fish
                 return self.value
-        
-        self.value +=fish
-        return self.value
+        else:
+            self.value +=fish
+            return self.value
     
-    def parenthese (self):
+    def parenthese (self): 
         n_par_ouvertes = self.value.count("(")
         n_par_fermees = self.value.count(")")
 
-        if n_par_ouvertes == n_par_fermees :
-            if self.value[-1] in "0123456789)":
+        if n_par_ouvertes == n_par_fermees : #si le nombre de parenthese ouvertes est égal au nombre de parenthese fermées, ajouter une parenthese ouvrante
+            if len(self.value)>=1 and self.value[-1] in "0123456789)":
                 self.value += "×("
                 return self.value           
             else:
                 self.value += "("
                 return self.value              
 
-        elif self.value[-1] in "+÷×^(":
+        elif len(self.value)>=1 and self.value[-1] in "+÷×^(":
             self.value += "("
             return self.value
          
@@ -54,7 +59,7 @@ class CalculatorModel:
             self.value += "("
             return self.value       
         
-        else :
+        elif self.value == "" :
             self.value += "("
             return self.value
 
@@ -78,8 +83,13 @@ class CalculatorModel:
         
 
     def delete(self):
+        if self.value =="Error" or self.value == "Paire" or self.value == "Impaire":
+            self.value=""
+            return self.value
         self.value = self.value[:-1]
         return self.value
+    
+       
     
     def clear(self):
         self.value=""
