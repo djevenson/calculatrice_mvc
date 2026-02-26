@@ -11,22 +11,30 @@ Pour installer ce projet, suivez les étapes ci-dessous :
    ```bash
     cd calculatrice_mvc
     ```3. Ouvrez le projet dans votre environnement de développement préféré (par exemple, Visual Studio Code, IntelliJ IDEA, etc.).
-4. Assurez-vous d'avoir python installé sur votre machine. Vous pouvez vérifier cela en exécutant la commande suivante dans votre terminal :
+2. Assurez-vous d'avoir python installé et custumtkinter sur votre machine. Vous pouvez vérifier cela en exécutant les commandes suivants dans votre terminal :
     ```bash
      python --version
-     ```5. Installez les dépendances nécessaires (si applicable) en utilisant pip :
+     pip show customtkinter
+     ```5. Si vous n'avez pas custumtkinter installé, vous pouvez l'installer en utilisant pip :
     ```bash
-     pip install -r requirements.txt
-     ```6. Exécutez le projet en suivant les instructions spécifiques à votre environnement de développement.
+     pip install customtkinter
+     ```6. Une fois que vous avez installé les dépendances nécessaires, vous pouvez exécuter le projet en lançant le fichier principal (main_interactive.py) dans votre environnement de développement.
+
+
+    
+
+
 
 # Utilisation
 Une fois que vous avez installé le projet, vous pouvez l'utiliser pour effectuer des calculs simples. Voici comment utiliser la calculatrice :
 1. Lancez l'application.
-2. Entrez les chiffres et les opérations que vous souhaitez effectuer.
+2. Entrez les chiffres et les opérations(addition, soustraction, multiplication, division,exposant,racine carrée) que vous souhaitez effectuer.
 3. Appuyez sur le bouton égal (=) pour obtenir le résultat.
-4. Vous pouvez également utiliser les boutons de réinitialisation pour effacer les entrées précédentes.
+4.vous pouver egalement utiliser les touches de votre clavier pour entrer les chiffres et les opérations.
+5. ouvert et fermer les parentheses pour effectuer des calculs plus complexes.
+6. r-->> radical , ** --> exposant , backspace pour effacer le dernier caractère entré , * --> multiplication , / --> division , + --> addition , - --> soustraction, . --> point pour les nombres décimaux, enfin les chiffres de 0 à 9 pour entrer les nombres.
 
-# Contributing
+# Contribution 
 Si vous souhaitez contribuer à ce projet, veuillez suivre les étapes ci-dessous :
 1. Forkez le dépôt.
 2. Créez une nouvelle branche pour votre fonctionnalité ou correction de bug :
@@ -41,7 +49,7 @@ Si vous souhaitez contribuer à ce projet, veuillez suivre les étapes ci-dessou
      ```5. Ouvrez une pull request pour que vos modifications soient examinées et fusionnées dans le projet principal.
 
 # Menbres du groupe
-- Djevenson Janvier
+- Djevenson JANVIER
 - Jacques Louis Dino DESROSIER
 - Jonel ALLIANCE
 - Dawenshy AMAZAN
