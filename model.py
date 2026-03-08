@@ -37,7 +37,16 @@ class CalculatorModel:
             self.value +=fish
             return self.value
     
-
+    def plus_moins(self):
+        if self.value == "":
+            self.value += "-"
+            return self.value
+        elif self.value[0] == "-":
+            self.value = self.value[1:]
+            return self.value
+        else:
+            self.value = "-" + self.value
+            return self.value
 
     def parenthese (self): 
         n_par_ouvertes = self.value.count("(")

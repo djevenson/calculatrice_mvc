@@ -71,7 +71,7 @@ class CalculatorView:
             justify = "right",
             width = 300,
             height= 50 ,
-            border_width= 1,
+            border_width= 0,
             fg_color="transparent",
             state= "readonly"
             )

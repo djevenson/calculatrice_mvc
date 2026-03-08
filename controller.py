@@ -57,7 +57,7 @@ class CalculatorController:
             )
 
         self.view.btn2_list[9].configure(
-            command = lambda : self.on_click("(-")
+            command = self.plus_moins
             )
 
         self.view.btn0_list[1].configure(
@@ -78,9 +78,12 @@ class CalculatorController:
         self.view.historique_frame.grid_forget()
         self.view.win_view.geometry("300x380")
 
+    def plus_moins(self):
+        value = self.model.plus_moins()
+        self.view.set_entrer(value)
+        
+
     def calculate(self):
-        
-        
         value = self.model.calculate()
         self.view.set_entrer(value)
         if self.model.history_list:
