@@ -1,4 +1,4 @@
-# calculatrice_mvc
+# Calculatrice-MVC (GUI)
 Projet final fall semester 2025-2026
 
 # Description
@@ -65,5 +65,3 @@ git push origin nom-de-votre-branche
 - DESROSIERS Jacques Louis Dino 
 - ALLIANCE Jonel Junior
   
-
-
