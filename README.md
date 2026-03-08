@@ -64,4 +64,3 @@ git push origin nom-de-votre-branche
 - AMAZAN Dawenshy 
 - DESROSIERS Jacques Louis Dino 
 - ALLIANCE Jonel Junior
-  

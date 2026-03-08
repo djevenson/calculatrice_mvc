@@ -1,18 +1,72 @@
 #pour ajouter la fenetre
+from tkinter import font
+
 import customtkinter as ctk
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
-
 
 class CalculatorView:
     def __init__(self,win_view):     
         self.win_view=win_view
         self.win_view.title("Calculatrice")
+        self.win_view.geometry("300x380")
         self.win_view.resizable(False,False)
         self.win_view.iconbitmap("20260222_2226_image.ico")
         
+        self.calculatrice_frame = ctk.CTkFrame(
+            self.win_view,
+            fg_color="transparent"
+            )
+        self.calculatrice_frame.grid(row=0,column=0,sticky="nsew")
+        
+        self.historique_frame = ctk.CTkFrame(
+            self.win_view,
+            fg_color="transparent"
+            )
+
+        self.btn_fermer = ctk.CTkButton(
+            self.historique_frame,
+            text="←",
+            text_color= "#40E0D0",
+            fg_color="transparent",
+            font=("Cascadia Code",18),
+            width = 30,
+            height = 20,
+            hover_color= "#2C2C2C"
+        )
+        self.btn_fermer.grid(row=0, column=3, padx=2, pady=2, sticky="w")
+
+        self.btn_suprimer_hist = ctk.CTkButton(
+            self.historique_frame,
+            text="clear",
+            text_color= "red",
+            fg_color="transparent",
+            font=("Cascadia Code",14),
+            width = 30,
+            height = 20,
+            hover_color= "#2C2C2C"
+        )
+        self.btn_suprimer_hist.grid(row=2, column=2, padx=2, pady=2, sticky="se")
+
+        self.label_historique = ctk.CTkLabel(
+            self.historique_frame,
+            text= "Historique",
+            font= ("Cascadia Code",14),
+            text_color= "#40E0D0"
+        )
+        self.label_historique.grid(row=0, column=0, columnspan = 2,padx=2, pady=2)
+
+
+        self.historique_scrollframe = ctk.CTkScrollableFrame(
+            self.historique_frame,
+            width=184,
+            height=290,
+            fg_color="transparent"
+        )
+        self.historique_scrollframe.grid(row = 1, column=0, columnspan= 4, sticky="nsew", padx=2, pady=2)
+
         self.entrer = ctk.CTkEntry(
-            win_view,
+            self.calculatrice_frame,
             font=("Cascadia Code",14),
             justify = "right",
             width = 300,
@@ -29,7 +83,7 @@ class CalculatorView:
         
         
         self.histbtn = ctk.CTkButton(
-            win_view,
+            self.calculatrice_frame,
             text="🕒",
             text_color= "#40E0D0",
             font=("Cascadia Code",14),
@@ -53,7 +107,7 @@ class CalculatorView:
         self.btn0_list = []
         for i,nom in enumerate(list_bouton):
             btn0 = ctk.CTkButton(
-                win_view,
+                self.calculatrice_frame,
                 text=nom,
                 font=("Cascadia Code",14),
                 text_color= "#40E0D0",
@@ -78,7 +132,7 @@ class CalculatorView:
         self.btn1_list = []
         for i,nom in enumerate(list_bouton1):
             btn1 = ctk.CTkButton(
-                win_view,
+                self.calculatrice_frame,
                 text=nom,
                 font=("Cascadia Code",14),
                 text_color= "#40E0D0",
@@ -105,7 +159,7 @@ class CalculatorView:
         self.btn2_list = []
         for i , nom in enumerate(list_bouton2) :
             btn2 = ctk.CTkButton(
-                win_view,
+                self.calculatrice_frame,
                 text=nom,
                 font=("Cascadia Code",14),
                 text_color= "#40E0D0",
@@ -130,7 +184,7 @@ class CalculatorView:
         self.btn3_list = []
         for i,nom in enumerate(list_bouton3):
             btn3 = ctk.CTkButton(
-                win_view,
+                self.calculatrice_frame,
                 text=nom,
                 text_color= "#40E0D0",
                 font=("Cascadia Code",14),
@@ -160,7 +214,7 @@ class CalculatorView:
         self.btn3_list[0].configure(text_color="red")
 
         self.egal_btn = ctk.CTkButton(
-            win_view,
+            self.calculatrice_frame,
             text= "=",
             font=("Cascadia Code",14),
             text_color= "#40E0D0",
@@ -183,3 +237,4 @@ class CalculatorView:
         self.entrer.delete(0,ctk.END)
         self.entrer.insert(0,value)
         self.entrer.configure(state="readonly")
+        
