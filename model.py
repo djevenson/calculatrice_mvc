@@ -1,31 +1,33 @@
 import math
 
-class CalculatorModel:  #classe qui gere les donnees et la logique de l'application
-    def __init__(self): #initialisation de la classe
-        self.value=""   
+class CalculatorModel:  
+    def __init__(self): 
+        self.value=""
+        self.true_value =self.value
+        self.history_list = []   
 
-    def add(self,fish): #ajouter le caractère clique au entry
+
+
+    def add(self,fish): 
         
-        if self.value =="" and fish in "+÷×^": #si le entry est vide et que l'utilisateur clique sur un opérateur, ne rien faire
-            self.value = ""
+        if self.value =="" and fish in "+÷×^": 
             return self.value
         
         elif fish.isalpha():
             return self.value
 
-        elif self.value == "" and fish == ".": #si le entry est vide et que l'utilisateur clique sur le point, ajouter "0." au entry
+        elif self.value == "" and fish == ".": 
             self.value += "0."
             return self.value
 
-        elif len(self.value)>=1 and self.value[-1] in "+-×÷^." and fish in "+-×÷^.": #si le dernier caractère du entry est un opérateur et que l'utilisateur clique sur un opérateur, remplacer le dernier caractère par le nouveau
+        elif len(self.value)>=1 and self.value[-1] in "+-×÷^." and fish in "+-×÷^.": 
             return self.value
-        
-        
+            
         elif len(self.value)>=1 and self.value[-1]==")" and fish.isdigit():
             self.value += "×" + fish
             return self.value
     
-        elif self.value == "0": #si le entry contient "0" et que l'utilisateur clique sur un chiffre, remplacer "0" par le nouveau chiffre
+        elif self.value == "0": 
             if fish.isdigit():
                 return fish
             else :
@@ -35,11 +37,13 @@ class CalculatorModel:  #classe qui gere les donnees et la logique de l'applicat
             self.value +=fish
             return self.value
     
+
+
     def parenthese (self): 
         n_par_ouvertes = self.value.count("(")
         n_par_fermees = self.value.count(")")
 
-        if n_par_ouvertes == n_par_fermees : #si le nombre de parenthese ouvertes est égal au nombre de parenthese fermées, ajouter une parenthese ouvrante
+        if n_par_ouvertes == n_par_fermees : 
             if len(self.value)>=1 and self.value[-1] in "0123456789)":
                 self.value += "×("
                 return self.value           
@@ -63,7 +67,14 @@ class CalculatorModel:  #classe qui gere les donnees et la logique de l'applicat
             self.value += "("
             return self.value
 
-    
+
+
+    def remplacer (self,fish):
+        self.value = fish
+        return self.value
+
+
+
     def racine (self) :
         if self.value == "":
             self.value += "√("
@@ -79,8 +90,8 @@ class CalculatorModel:  #classe qui gere les donnees et la logique de l'applicat
         else :
             self.value += "×√("
             return self.value
-        
-        
+
+
 
     def delete(self):
         if self.value =="Error" or self.value == "Paire" or self.value == "Impaire":
@@ -89,26 +100,26 @@ class CalculatorModel:  #classe qui gere les donnees et la logique de l'applicat
         self.value = self.value[:-1]
         return self.value
     
-       
-    
+
+
     def clear(self):
         self.value=""
         return self.value
     
-#autoriser tout les fonction de la biblioteque mathematique sauf celle avec "__" au debut
-    
+
 
     def converssion_signe(self,value):
         key = value.replace ("×" , "*")
         key = key.replace ("÷" , "/")
-        key = key.replace ("√" , "sqrt")
+        key = key.replace ("√" , "math.sqrt")
         key = key.replace ("^" , "**")
         return key
+    
+
 
     def calculate(self):
-         
-        fonction_acceptable = {k: getattr(math,k) for k in dir(math) if not k.startswith("__")}
 
+        true_value = self.value
         self.value = self.converssion_signe(self.value)
 
         if len(self.value)>=1 and self.value[-1] in "×÷^√-+":
@@ -124,19 +135,22 @@ class CalculatorModel:  #classe qui gere les donnees et la logique de l'applicat
             return self.value
         
         try:
-            self.value=str(eval(self.value,{"__builtins__":None},fonction_acceptable))
-            if "." in self.value:
-                resultat = str(round(float(self.value),5))
-                return resultat
-            else:
-                return self.value
-        
-
+            resultat = str(eval(self.value))
+            
+            self.history_list.append(f"{true_value} = {resultat}")
+            self.value = resultat
+            return self.value    
+            
         except Exception as e :
             self.value="Error"
             return self.value
-        
     
+
+
+    def get_history(self):
+        return self.history_list
+
+
 
     def modulo (self) :
         try:
